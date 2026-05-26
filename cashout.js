@@ -1,28 +1,42 @@
 document.getElementById('cashout-btn')
     .addEventListener('click', function () {
         const cashoutNumber = getValueFromInput('cashout-number');
-       if(cashoutNumber.length != 11){
-        alert('invalid Number')
-        return;
-       }
+        if (cashoutNumber.length != 11) {
+            alert('invalid Number')
+            return;
+        }
         const cashoutAmount = getValueFromInput('cashout-amount');
 
         const currentBalance = getBalance();
         const newBalance = currentBalance - Number(cashoutAmount);
         console.log(newBalance);
-     if(newBalance < 0 ){
-        alert('invalid Amount')
-        return;
-     }
-   const pin = getValueFromInput('cashout-pin');
-   if( pin === '1234'){
-    alert('Cashout Successfull')
-  setBalance(newBalance);
-}
+        if (newBalance < 0) {
+            alert('invalid Amount')
+            return;
+        }
+        const pin = getValueFromInput('cashout-pin');
+        if (pin === '1234') {
+            alert('Cashout Successfull')
+            setBalance(newBalance);
+           
+           
+            const history = document.getElementById('history-container');
+            console.log(history);
+            const newHistory = document.createElement('div');
 
-else{
-    alert('invalid Pin')
-}
+            newHistory.innerHTML = `
+        <div class="transaction-card p-5 bg-base-100">
+          
+         Cashout ${cashoutAmount} TAKA Success to ${cashoutNumber} , at ${new Date()}
+        </div>
+      `;
+
+            history.append(newHistory);
+        }
+
+        else {
+            alert('invalid Pin')
+        }
     });
 
 
